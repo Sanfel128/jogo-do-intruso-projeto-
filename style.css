@@ -145,13 +145,13 @@ h2{
 
 /* Caminhos das imagens das fases */
 #fase1 { 
-  background-image: url("../assets/Imagens/fase1/sala.png"); 
+  background-image: url("assets/Imagens/fase1/sala.png"); 
 }
 #fase2 { 
-  background-image: url("../assets/Imagens/fase2/quarto.png"); 
+  background-image: url("assets/Imagens/fase2/quarto.png"); 
 }
 #fase3 { 
-  background-image: url("../assets/Imagens/fase3/cozinha.png"); 
+  background-image: url("assets/Imagens/fase3/cozinha.png"); 
 }
 /* Container para a explosão - cobre a tela toda, mas não bloqueia cliques */
 #explosion-container {
