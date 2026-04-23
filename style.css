@@ -21,7 +21,7 @@ h2{
 
 #inicio {
   /* Use a forma abreviada para evitar conflitos */
-  background: url("../assets/Imagens/Iniciar/telainicial.png") no-repeat center center;
+  background: url("/assets/Imagens/Iniciar/telainicial.png") no-repeat center center;
   background-size: cover; /* Faz a imagem cobrir a tela sem repetir */
   background-position: center 25%;
   height: 100vh;
