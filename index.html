@@ -1,42 +1,62 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-
-    <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
-    <title>Intruder</title>
+    <title>O Intruso</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://googleapis.com" rel="stylesheet" />
   </head>
+
   <body>
-    <section id="tela-inicial">
-      <h1>O Intruso</h1>
-      <button id="b-iniciar">Iniciar</button><br />
-      <p>Figurinhas intrusas estão escondidas por aí!</p>
-      <p>Será que você consegue encontrá-las?</p>
-      <p>Jogue e descubra!</p>
+    <section id="inicio">
+      <button id="btnIniciar">Iniciar</button>
     </section>
 
-    <section id="instrucoes">
-      <h2>Como Jogar?</h2>
-      <ul>
-        <li>Observe o cenário.</li>
-        <li>
-          Procure pelas figurinhas que nao pertencem ao cenário. Basta clicar
-          nelas para removê-las!
-        </li>
-        <li>Encontre todas as figurinhas para passar de nível!</li>
-      </ul>
+    <section class="fase" id="fase1">
+      <h2>Sala</h2>
+      <img src="../assets/Imagens/fase1/BALDE.png" class="obj p1" />
+      <img src="../assets/Imagens/fase1/CENOURA.png" class="obj p2" />
+      <img src="../assets/Imagens/fase1/REGADOR.png" class="obj p3" />
     </section>
 
-    <section id="tela-f1"></section>
-    <section id="tela-f2"></section>
-    <section id="tela-f3"></section>
+    <section class="fase" id="fase2">
+      <h2>Quarto</h2>
+      <img src="../assets/Imagens/fase2/SOS.png" class="obj p4" />
+      <img src="../assets/Imagens/fase2/ABACAXI.png" class="obj p5" />
+      <img src="../assets/Imagens/fase2/CONTROLE.png" class="obj p6" />
+      <img src="../assets/Imagens/fase2/LANTERNA.png" class="obj p7" />
+      <img src="../assets/Imagens/fase2/MARTELO.png" class="obj p8" />
+    </section>
 
-    <section id="tela-final">
+    <section class="fase" id="fase3">
+      <h2>Cozinha</h2>
+      <img src="../assets/Imagens/fase3/AQUARELA.png" class="obj p9" />
+      <img src="../assets/Imagens/fase3/FOGUETE.png" class="obj p10" />
+      <img src="../assets/Imagens/fase3/FUTEBOL.png" class="obj p11" />
+      <img src="../assets/Imagens/fase3/URSO.png" class="obj p12" />
+      <img src="../assets/Imagens/fase3/RAQUETE.png" class="obj p13" />
+      <img src="../assets/Imagens/fase3/FONE.png" class="obj p14" />
+      <img src="../assets/Imagens/fase3/S.VASO.png" class="obj p15" />
+      <img src="../assets/Imagens/fase3/BASQUETE.png" class="obj p16" />
+    </section>
+
+    <section id="final">
       <h2>Parabéns!</h2>
-      <p>Você encontrou todas as figuras intrusas!</p>
-      <p>Obrigado por jogar!</p>
-      <button id="b-voltar">Voltar ao Início</button>
+      <button id="btnVoltar">Voltar</button>
     </section>
-    <script src="script.js"></script>
+
+    <script src="script.js"></script><div id="explosion-container"></div>
+  
+  <section id="inicio">
+
+    <div id="explosion-container"></div>
+  
+  <section id="inicio">
+
+    <div id="explosion-container"></div>
+
+  <section id="inicio">
+
+
   </body>
 </html>
