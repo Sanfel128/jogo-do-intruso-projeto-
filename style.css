@@ -4,16 +4,17 @@ body {
 }
 
 #inicio {
-  background: url("../assets/Imagens/Iniciar/telainicial.png");
-  background-size: 100% 100%;
-  background-position: top center;
-  background-repeat: no-repeat;
+  /* Use a forma abreviada para evitar conflitos */
+  background: url("../assets/Imagens/Iniciar/telainicial.png") no-repeat center center;
+  background-size: cover; /* Faz a imagem cobrir a tela sem repetir */
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin: 0;
 }
+
 #btnIniciar {
   color: rgb(245, 245, 245);
   margin-top: 190px;
@@ -31,25 +32,7 @@ body {
   transform: scale(1.4);
 }
 
-.fase {
-  display: none;
-  height: 100vh;
-  position: relative;
-}
 
-.ativa {
-  display: block;
-}
-
-#fase1 {
-  background: url("../assets/Imagens/fase1/sala.png") center/cover;
-}
-#fase2 {
-  background: url("../assets/Imagens/fase2/quarto.png") center/cover;
-}
-#fase3 {
-  background: url("../assets/Imagens/fase3/cozinha.png") center/cover;
-}
 
 .obj {
   position: absolute;
@@ -126,53 +109,32 @@ body {
   left: 20%;
 }
 
-/* Container para a explosão - cobre a tela toda, mas não bloqueia cliques */
-#explosion-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
+/* --- CONFIGURAÇÃO DAS FASES --- */
+
+.fase {
+  display: none;
   height: 100vh;
-  pointer-events: none; /* Deixa clicar nos botões atrás */
-  z-index: 999; /* Garante que fique por cima de tudo */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  /* Garante que a imagem não duplique */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-/* Estilo base de cada partícula */
-.particle {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%; /* Bolinhas, mas pode ser quadrado se tirar isso */
-  opacity: 0;
-  /* Animação: explode e depois faz fade out */
-  animation: explode 1.5s ease-out forwards, fadeOut 1.5s ease-out forwards;
+.ativa {
+  display: block;
 }
 
-/* Keyframes para a explosão crescente */
-@keyframes explode {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    /* translateVar será definido via JS para direções aleatórias */
-    transform: translate(var(--translateX), var(--translateY)) scale(var(--scale));
-  }
+/* Caminhos das imagens das fases */
+#fase1 { 
+  background-image: url("../assets/Imagens/fase1/sala.png"); 
 }
-
-/* Keyframes para o desbotamento final */
-@keyframes fadeOut {
-  0%, 60% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+#fase2 { 
+  background-image: url("../assets/Imagens/fase2/quarto.png"); 
 }
-
+#fase3 { 
+  background-image: url("../assets/Imagens/fase3/cozinha.png"); 
+}
 /* Container para a explosão - cobre a tela toda, mas não bloqueia cliques */
 #explosion-container {
   position: fixed;
