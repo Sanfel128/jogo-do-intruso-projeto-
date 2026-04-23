@@ -4,7 +4,7 @@ const telaFinal = document.getElementById('tela-final');
 const btnIniciar = document.getElementById('b-iniciar');
 const btnVoltar = document.getElementById('b-voltar');
 
-// Iniciar o jogo na Fase 1
+// Iniciar o jogo na Fase 1.
 btnIniciar.onclick = () => {
     telaInicial.style.display = 'none';
     telaJogo.style.display = 'block';
