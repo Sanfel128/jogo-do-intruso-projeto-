@@ -1,83 +1,101 @@
-const telaInicial = document.getElementById('tela-inicial');
-const telaJogo = document.getElementById('tela-f1');
-const telaFinal = document.getElementById('tela-final');
-const btnIniciar = document.getElementById('b-iniciar');
-const btnVoltar = document.getElementById('b-voltar');
+let faseAtual = 0;
+const fases = document.querySelectorAll(".fase");
+let objetosRestantes = 0;
 
-// Iniciar o jogo na Fase 1.
-btnIniciar.onclick = () => {
-    telaInicial.style.display = 'none';
-    telaJogo.style.display = 'block';
-    carregarFasePraia();
-};
+// Lista de todas as classes de posição que você criou no CSS
+const todasPosicoes = ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9", "p10", "p11", "p12", "p13", "p14", "p15", "p16"];
 
-// --- FASE 1: PRAIA ---
-function carregarFasePraia() {
-    telaJogo.innerHTML = '<h2>Fase 1: O que não pertence à Praia?</h2>';
+document.getElementById("btnIniciar").addEventListener("click", () => {
+  document.getElementById("inicio").style.display = "none";
+  iniciarFase();
+});
+
+function iniciarFase() {
+  // 1. Mostra a fase atual
+  fases.forEach(f => f.classList.remove("ativa"));
+  const faseAtiva = fases[faseAtual];
+  faseAtiva.classList.add("ativa");
+
+  // 2. Seleciona os objetos desta fase
+  const objetos = faseAtiva.querySelectorAll(".obj");
+  objetosRestantes = objetos.length;
+
+  // 3. Embaralha as posições disponíveis
+  // Criamos uma cópia do array e embaralhamos
+  let posicoesEmbaralhadas = [...todasPosicoes].sort(() => Math.random() - 0.5);
+
+  // 4. Atribui uma posição aleatória para cada objeto
+  objetos.forEach((obj, index) => {
+    // Remove qualquer classe de posição anterior que o HTML possa ter
+    obj.classList.remove(...todasPosicoes);
     
-    const container = document.createElement('div');
-    container.className = 'cenario-container';
-    container.style.backgroundColor = "#fce38a"; // Cor de areia
-    // container.style.backgroundImage = "url('praia.jpg')"; // Quando tiver a imagem, use esta linha
-    telaJogo.appendChild(container);
-
-    const normais = ['🐚', '🏖️', '🦀', '⛱️'];
-    const intruso = '💻'; // Notebook não pertence à praia
-
-    // Gerar itens normais
-    for (let i = 0; i < 10; i++) {
-        const item = normais[Math.floor(Math.random() * normais.length)];
-        criarElemento(item, container, false, "Isso pertence à praia!");
-    }
-
-    // Gerar o intruso da praia
-    criarElemento(intruso, container, true, "Boa! Um notebook na areia estragaria!", carregarFaseSala);
-}
-
-// --- FASE 2: SALA DE ESTAR ---
-function carregarFaseSala() {
-    telaJogo.innerHTML = '<h2>Fase 2: O que não pertence à Sala?</h2>';
+    // Adiciona a nova classe sorteada
+    obj.classList.add(posicoesEmbaralhadas[index]);
     
-    const container = document.createElement('div');
-    container.className = 'cenario-container';
-    container.style.backgroundColor = "#a8e6cf"; // Cor de parede de sala
-    telaJogo.appendChild(container);
+    // Garante que o objeto esteja visível (caso tenha sido escondido antes)
+    obj.style.display = "block";
 
-    const moveis = ['🛋️', '📺', '📚', '🖼️', '☕'];
-    const intruso = '⚓'; // Uma âncora de navio não pertence à sala
+    // Adiciona o evento de clique (usando {once: true} para evitar bugs)
+    obj.onclick = () => {
+      obj.style.display = "none";
+      objetosRestantes--;
 
-    // Gerar móveis
-    moveis.forEach(movel => {
-        criarElemento(movel, container, false, "Isso é um móvel da sala.");
-    });
-
-    // Gerar o intruso da sala
-    criarElemento(intruso, container, true, "Exato! Uma âncora no meio da sala?", finalizarJogo);
-}
-
-// --- FUNÇÕES AUXILIARES ---
-
-function criarElemento(simbolo, pai, ehIntruso, mensagem, acaoSucesso) {
-    const el = document.createElement('span');
-    el.innerHTML = simbolo;
-    el.className = 'objeto';
-    el.style.left = Math.random() * 540 + 'px';
-    el.style.top = Math.random() * 340 + 'px';
-
-    el.onclick = () => {
-        if (ehIntruso) {
-            alert(mensagem);
-            acaoSucesso();
-        } else {
-            alert(mensagem);
-        }
+      if (objetosRestantes === 0) {
+        proximaFase();
+      }
     };
-    pai.appendChild(el);
+  });
 }
 
-function finalizarJogo() {
-    telaJogo.style.display = 'none';
-    telaFinal.style.display = 'block';
+function proximaFase() {
+  fases[faseAtual].classList.remove("ativa");
+  faseAtual++;
+
+  if (faseAtual < fases.length) {
+    iniciarFase();
+  } else {
+    // Se acabarem as fases, mostra a tela final
+    document.getElementById("final").style.display = "flex";
+    
+    // --- NOVA LINHA: CHAMA A EXPLOSÃO ---
+    criarExplosao();
+  }
 }
 
-btnVoltar.onclick = () => location.reload();
+// Função para gerar a explosão de partículas coloridas
+function criarExplosao() {
+  const container = document.getElementById('explosion-container');
+  const quantidadeParticulas = 100; // Número de bolinhas
+
+  for (let i = 0; i < quantidadeParticulas; i++) {
+    const particula = document.createElement('div');
+    particula.classList.add('particle');
+
+    // Define direções aleatórias para a explosão (translate X e Y)
+    // Usamos vh/vw para garantir que espalhe pela tela toda
+    const translateX = (Math.random() - 0.5) * 200 + 'vw';
+    const translateY = (Math.random() - 0.5) * 200 + 'vh';
+    
+    // Define um tamanho final aleatório para a partícula crescer
+    const scale = Math.random() * 15 + 5; // Cresce de 5x a 20x o tamanho inicial
+
+    // Aplica essas variáveis aleatórias como propriedades CSS
+    particula.style.setProperty('--translateX', translateX);
+    particula.style.setProperty('--translateY', translateY);
+    particula.style.setProperty('--scale', scale);
+
+    // Adiciona um pequeno atraso aleatório para não saírem todas grudadas
+    particula.style.animationDelay = Math.random() * 0.2 + 's';
+
+    container.appendChild(particula);
+
+    // Remove a partícula do HTML depois que a animação acabar para não pesar
+    particula.addEventListener('animationend', () => {
+      particula.remove();
+    });
+  }
+}
+
+document.getElementById("btnVoltar").addEventListener("click", () => {
+  location.reload();
+});
