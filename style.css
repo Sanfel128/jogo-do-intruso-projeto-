@@ -1,12 +1,29 @@
-body {
+html,body {
   margin: 0;
   font-family: inherit;
+  height: 100%;
+  overflow: hidden; /* remove scroll */
 }
+
+h2{
+  color: rgb(245, 245, 245);
+  display: inline-block;
+  margin-left: 20px;
+  padding: 5px 8px;
+  font-size: 25px;
+  font-family: "Luckiest Guy", cursive;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.418);
+  background-color: rgb(240, 143, 63);
+  border: 2px solid rgb(180, 87, 10);
+  border-radius:5px;
+}
+
 
 #inicio {
   /* Use a forma abreviada para evitar conflitos */
   background: url("../assets/Imagens/Iniciar/telainicial.png") no-repeat center center;
   background-size: cover; /* Faz a imagem cobrir a tela sem repetir */
+  background-position: center 25%;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -119,6 +136,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  overflow: hidden; /* impede qualquer estouro */
 }
 
 .ativa {
